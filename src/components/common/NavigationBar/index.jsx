@@ -7,7 +7,6 @@ import {
   Stack,
   Collapse,
   Link,
-  useBreakpointValue,
   useDisclosure,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
@@ -29,6 +28,10 @@ const navItems = [
     label: 'Experience',
     href: '/experience',
   },
+  {
+    label: 'Blog',
+    href: '/blog',
+  },
 ];
 
 function NavigationBar() {
@@ -47,27 +50,21 @@ function NavigationBar() {
             aria-label={'Toggle Navigation'}
           />
         </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Text
-            textAlign={useBreakpointValue({ base: 'left', md: 'left' })}
-            color={'content.primary'}
-            fontWeight={'bold'}
-            fontSize={'xl'}
-          >
+        <Flex flex={{ base: 1 }} justify={'center'}>
+          <Text color={'content.primary'} fontWeight={'bold'} fontSize={'xl'}>
             Rachmadzii<span className="dot">.</span>
           </Text>
 
-          <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
+          <Flex
+            w={'full'}
+            justifyContent={'center'}
+            display={{ base: 'none', md: 'flex' }}
+          >
             <DesktopNav />
           </Flex>
         </Flex>
 
-        <Stack
-          flex={{ base: 1, md: 0 }}
-          justify={'flex-end'}
-          direction={'row'}
-          spacing={'auto'}
-        >
+        <Stack justify={'flex-end'} direction={'row'} spacing={'auto'}>
           <Button
             py={'5'}
             px={'7'}
@@ -96,11 +93,10 @@ function NavigationBar() {
 
 const DesktopNav = () => {
   return (
-    <Stack direction={'row'} spacing={4}>
+    <Stack direction={'row'} spacing={6} alignItems={'center'}>
       {navItems.map((navItem) => (
         <Box key={navItem.label}>
           <Link
-            p={2}
             href={navItem.href ?? '#'}
             fontWeight={500}
             color={'text.gray'}
