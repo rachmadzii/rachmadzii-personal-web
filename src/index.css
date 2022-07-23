@@ -10,11 +10,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.highlight {
+.highlight-navy {
   color: #1b2028;
   font-weight: 600;
 }
 
-.dot {
+.highlight-orange {
   color: #eb7530;
+  font-weight: 600;
 }

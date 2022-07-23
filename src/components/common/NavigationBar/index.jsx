@@ -52,7 +52,7 @@ function NavigationBar() {
         </Flex>
         <Flex flex={{ base: 1 }} justify={'center'}>
           <Text color={'content.primary'} fontWeight={'bold'} fontSize={'xl'}>
-            Rachmadzii<span className="dot">.</span>
+            Rachmadzii<span className="highlight-orange">.</span>
           </Text>
 
           <Flex
@@ -72,9 +72,12 @@ function NavigationBar() {
             fontSize={'sm'}
             fontWeight={600}
             color={'content.secondary'}
-            bg={'content.tertiary'}
-            href={'#'}
+            bgColor={'content.tertiary'}
             _hover={{
+              bg: 'content.secondary',
+              color: 'white',
+            }}
+            _focus={{
               bg: 'content.secondary',
               color: 'white',
             }}

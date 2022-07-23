@@ -1,7 +1,8 @@
-import { Button, Flex, Heading, Image, Text } from '@chakra-ui/react';
+import { Flex, Heading, Image, Text } from '@chakra-ui/react';
 import BaseLayout from 'components/layout/BaseLayout';
 import React from 'react';
 import image from 'assets/images/illustration.jpg';
+import ButtonPrimary from 'components/common/ButtonPrimary';
 
 function Home() {
   return (
@@ -30,31 +31,19 @@ function Home() {
             fontWeight={'500'}
             color={'text.gray'}
             maxW={'450px'}
+            mb={4}
           >
             I am interested in becoming a frontend developer who builds
             user-friendly websites and becomes a valuable person for others by
             sharing knowledge and insights.
             <br />
-            Welcome to <span className="highlight">my space 🚀</span>
+            Welcome to <span className="highlight-navy">my space 🚀</span>
           </Text>
-          <Button
-            href={'#'}
-            py={'5'}
-            px={'7'}
-            mt={'4'}
-            alignSelf={'start'}
-            borderRadius={12}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'content.secondary'}
-            _hover={{
-              bg: 'content.tertiary',
-              color: 'content.secondary',
-            }}
-          >
-            Get to know me
-          </Button>
+          <ButtonPrimary
+            cta={'Get to Know Me'}
+            align={'start'}
+            route={'/about'}
+          />
         </Flex>
         <Image src={image} w={'40%'}></Image>
       </Flex>

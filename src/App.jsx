@@ -6,6 +6,9 @@ import theme from './styles/theme';
 import Achievement from 'components/pages/Achievement';
 import Experience from 'components/pages/Experience';
 import About from 'components/pages/About';
+import Blog from 'components/pages/Blog';
+import DetailBlog from 'components/pages/Blog/DetailBlog';
+import CreateBlog from 'components/pages/Blog/CreateBlog';
 
 function App() {
   return (
@@ -15,6 +18,9 @@ function App() {
         <Route path="/about" element={<About />} exact />
         <Route path="/achievement" element={<Achievement />} exact />
         <Route path="/experience" element={<Experience />} exact />
+        <Route path="/blog" element={<Blog />} exact />
+        <Route path="/create-blog" element={<CreateBlog />} exact />
+        <Route path="/detail-blog" element={<DetailBlog />} exact />
       </Routes>
     </ChakraProvider>
   );

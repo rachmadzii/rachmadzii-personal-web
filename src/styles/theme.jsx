@@ -10,11 +10,11 @@ const colors = {
     primary: '#1B2028',
     secondary: '#EB7530',
     tertiary: '#EB753033',
+    red: '#F44336',
     'background-card': '#FAFAFA',
     'background-ellips': '#D9D9D9',
   },
   text: {
-    navy: '#1B2028',
     gray: '#9099A7',
   },
 };
