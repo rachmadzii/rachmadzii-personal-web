@@ -2,7 +2,8 @@ import { Flex, Heading, Image, Text } from '@chakra-ui/react';
 import BaseLayout from 'components/layout/BaseLayout';
 import React from 'react';
 import image from 'assets/images/illustration.jpg';
-import ButtonPrimary from 'components/common/ButtonPrimary';
+import ButtonNavigate from 'components/common/ButtonNavigate';
+import { data } from 'data';
 
 function Home() {
   return (
@@ -25,7 +26,9 @@ function Home() {
           >
             Hello World! 👋
           </Text>
-          <Heading size={'2xl'}>I am Rachmadzii.</Heading>
+          <Heading size={'2xl'} lineHeight={'56px'}>
+            {data.title}
+          </Heading>
           <Text
             lineHeight={'32px'}
             fontWeight={'500'}
@@ -33,16 +36,14 @@ function Home() {
             maxW={'450px'}
             mb={4}
           >
-            I am interested in becoming a frontend developer who builds
-            user-friendly websites and becomes a valuable person for others by
-            sharing knowledge and insights.
+            {data.description}
             <br />
             Welcome to <span className="highlight-navy">my space 🚀</span>
           </Text>
-          <ButtonPrimary
+          <ButtonNavigate
             cta={'Get to Know Me'}
             align={'start'}
-            route={'/about'}
+            path={'/about'}
           />
         </Flex>
         <Image src={image} w={'40%'}></Image>

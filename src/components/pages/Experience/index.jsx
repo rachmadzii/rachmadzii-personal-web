@@ -1,5 +1,6 @@
 import { Box, Center, Flex, Grid, Heading, Text } from '@chakra-ui/react';
 import BaseLayout from 'components/layout/BaseLayout';
+import { data } from 'data';
 import React from 'react';
 
 function Experience() {
@@ -34,45 +35,6 @@ function Experience() {
 }
 
 const CardExperience = () => {
-  const achievement = [
-    {
-      id: '01',
-      title: 'Frontend Engineer at Dietela Indonesia',
-      subtitle:
-        'I am responsible for developing Nutritional Mini Assessment App for Dietela users, using React JS and Chakra UI.',
-    },
-    {
-      id: '02',
-      title: 'Mobile Developer at Agreeculture Telkom',
-      subtitle:
-        'I am responsible for developing the Super App for Integrated Farming, which will be used for Agrees users and partners.',
-    },
-    {
-      id: '03',
-      title: 'Website Designer at BuildWith Angga',
-      subtitle:
-        'I am responsible for developing, implementing, and slicing UI Design into Website elements using HTML, CSS Bootstrap 5, and Blade Laravel.',
-    },
-    {
-      id: '04',
-      title: 'Class Operation at Harisenin.com',
-      subtitle:
-        'I am responsible for being a moderator and facilitator in a class Fullstack Developer, organize mentees documentation and reports.',
-    },
-    {
-      id: '05',
-      title: 'UI/UX Design at Digitalent Professional Academy',
-      subtitle:
-        'The awardee of Professional Academy Digitalent Scholarship in the field of UI/UX Design. I also participated in Skilvul UI/UX Challenge Mentor On Demand.',
-    },
-    {
-      id: '06',
-      title: 'Frontend Engineer at Generasi GIGIH 2.0',
-      subtitle:
-        'Participant of Generasi GIGIH 2.0 Independent Study. Motivated on the Frontend Engineer Track that learns React JS, TypeScript, GIT, and more.',
-    },
-  ];
-
   return (
     <Grid
       templateColumns={{
@@ -82,7 +44,7 @@ const CardExperience = () => {
       }}
       gap={16}
     >
-      {achievement.map((data) => (
+      {data.experience.map((data) => (
         <Box key={data.id} maxW={'285px'}>
           <Center
             p={2}

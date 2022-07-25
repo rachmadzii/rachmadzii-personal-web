@@ -1,52 +1,77 @@
-import { Box, Flex, Heading, Icon, Image, Text } from '@chakra-ui/react';
+import { Button, Flex, Heading, Icon, Image, Text } from '@chakra-ui/react';
 import BaseLayout from 'components/layout/BaseLayout';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import image from 'assets/images/cat_blog.png';
+import { getListAllBlog, likeBlog } from 'utils/fetchAPI';
+import { useParams } from 'react-router-dom';
+import DOMPurify from 'dompurify';
+import { FcLikePlaceholder, FcLike } from 'react-icons/fc';
+import Loading from 'components/common/Loading';
 
 function DetailBlog() {
+  const [articles, setArticles] = useState();
+  const params = useParams();
+
+  useEffect(() => {
+    const getArticle = async () => {
+      try {
+        const response = await getListAllBlog();
+        const articleFound = response.find(
+          (response) => response.id === params.blogId
+        );
+        if (articleFound) setArticles(articleFound);
+        else alert('Article not found ⛔');
+      } catch (e) {
+        alert(e);
+      }
+    };
+    getArticle();
+  }, [params.blogId]);
+
   return (
     <BaseLayout>
-      <Flex
-        px={{ base: 4, md: 14 }}
-        py={{ base: 10, lg: 16 }}
-        flexDirection={'column'}
-        gap={14}
-      >
-        <Box>
-          <Heading size={'xl'} mb={4}>
-            This is My First Blog
+      {articles ? (
+        <Flex
+          px={{ base: 4, md: 14 }}
+          py={{ base: 10, lg: 16 }}
+          flexDirection={'column'}
+          gap={12}
+        >
+          <Heading size={'xl'} color={'content.primary'}>
+            {articles.title}
           </Heading>
-          <Text fontSize={'lg'} color={'content.primary'}>
-            Author <span className="highlight-orange">Rachma Adzima</span>
-          </Text>
-        </Box>
-        <Text lineHeight={'34px'} color={'content.primary'}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-          <br />
-          <br />
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
-          ab illo inventore veritatis et quasi architecto beatae vitae dicta
-          sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-          aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
-          qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui
-          dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed
-          quia non numquam eius modi tempora incidunt ut labore et dolore magnam
-          aliquam quaerat voluptatem.
-        </Text>
-        <LikeSection />
-      </Flex>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(articles.content, {
+                FORCE_BODY: true,
+              }),
+            }}
+          />
+          <LikeSection totalLike={articles.like} id={articles.id} />
+        </Flex>
+      ) : (
+        <Loading />
+      )}
     </BaseLayout>
   );
 }
 
-const LikeSection = () => {
+const LikeSection = ({ totalLike, id }) => {
+  const [isLike, setIsLike] = useState(false);
+  const [like, setLike] = useState(totalLike);
+
+  const handleAlreadyLike = () => alert('You already loved this article 💖');
+
+  const handleLike = async () => {
+    setIsLike(true);
+    try {
+      const response = await likeBlog(id);
+      setLike(response.like);
+    } catch (e) {
+      alert(e);
+    }
+  };
+
   return (
     <Flex
       flexDirection={{
@@ -83,22 +108,25 @@ const LikeSection = () => {
           Was the following article helpful?
         </Heading>
         <Flex alignItems={'center'} gap={3}>
-          <Icon
-            viewBox={'0 0 36 36'}
-            width={'36px'}
-            height={'36px'}
-            fill={'transparent'}
+          <Button
+            p={0}
+            bgColor={'transparent'}
+            _hover={{
+              bgColor: 'transparent',
+            }}
+            _focus={{
+              bgColor: 'transparent',
+            }}
+            onClick={!isLike ? handleLike : handleAlreadyLike}
           >
-            <path
-              d="M11.25 6C6.69375 6 3 9.69375 3 14.25C3 22.5 12.75 30 18 31.7445C23.25 30 33 22.5 33 14.25C33 9.69375 29.3062 6 24.75 6C21.96 6 19.4925 7.38525 18 9.5055C17.2393 8.42191 16.2286 7.53757 15.0536 6.92737C13.8787 6.31716 12.574 5.99907 11.25 6Z"
-              stroke="#1B2028"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </Icon>
-          <Text fontWeight={'500'} color={'content.primary'}>
-            10 loved this
+            {isLike ? (
+              <Icon as={FcLike} boxSize={'36px'} />
+            ) : (
+              <Icon as={FcLikePlaceholder} boxSize={'36px'} />
+            )}
+          </Button>
+          <Text mt={1} fontWeight={'500'} color={'content.primary'}>
+            {like} loved this
           </Text>
         </Flex>
       </Flex>

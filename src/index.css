@@ -19,3 +19,24 @@ body {
   color: #eb7530;
   font-weight: 600;
 }
+
+.nav-link {
+  font-weight: 500;
+  color: #9099a7;
+}
+
+.nav-active,
+.nav-link:hover {
+  font-weight: 500;
+  color: #1b2028;
+}
+
+.nav-active {
+  border-bottom: 3px solid #eb7530;
+}
+
+.link-read {
+  font-weight: 500;
+  color: #eb7530;
+  text-decoration: none;
+}

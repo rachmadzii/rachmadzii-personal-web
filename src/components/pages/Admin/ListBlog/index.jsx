@@ -1,14 +1,24 @@
-import { Center, Flex, Heading, Icon, Image, Text } from '@chakra-ui/react';
+import {
+  Button,
+  Center,
+  Flex,
+  Heading,
+  Icon,
+  Image,
+  Text,
+} from '@chakra-ui/react';
 import BaseLayout from 'components/layout/BaseLayout';
 import React, { useEffect, useState } from 'react';
 import image from 'assets/images/empty_blog.png';
+import { FiEdit } from 'react-icons/fi';
 import { getListAllBlog } from 'utils/fetchAPI';
+import ButtonNavigate from 'components/common/ButtonNavigate';
 import { FcLike } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
 import DOMPurify from 'dompurify';
 import Loading from 'components/common/Loading';
 
-function Blog() {
+function ListBlog() {
   return (
     <BaseLayout>
       <Center
@@ -23,22 +33,22 @@ function Blog() {
             fontSize={'lg'}
             color={'content.secondary'}
           >
-            Something helpful
+            Create something helpful
           </Text>
           <Heading size={'xl'} color={'content.primary'}>
-            Great Articles
+            Manage Your Articles
           </Heading>
           <Text fontWeight={'400'} color={'text.gray'}>
-            Are you looking for some helpful reading? Here it is!
+            Share something new through your writing!
           </Text>
         </Flex>
-        <ListBlog />
+        <GetAllBlog />
       </Center>
     </BaseLayout>
   );
 }
 
-const ListBlog = () => {
+const GetAllBlog = () => {
   const [articles, setArticles] = useState();
 
   useEffect(() => {
@@ -57,8 +67,16 @@ const ListBlog = () => {
     <Flex flexDirection={'column'} gap={10} w={'100%'}>
       {articles ? (
         <>
+          <ButtonNavigate
+            cta={'Add a New Blog'}
+            align={'end'}
+            path={'/admin/blog/create'}
+            withIcon
+          />
           {articles.length === 0 && (
-            <EmptyBlog cta={'No articles are available yet'} />
+            <EmptyBlog
+              cta={'No articles available yet, start to write them.'}
+            />
           )}
           {articles.map((data) => (
             <Flex
@@ -85,23 +103,41 @@ const ListBlog = () => {
                 >
                   {data.title}
                 </Heading>
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(data.content, {
-                      FORCE_BODY: true,
-                    }),
-                  }}
-                />
+                <Text color={'content.primary'}>
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(data.content, {
+                        FORCE_BODY: true,
+                      }),
+                    }}
+                  />
+                </Text>
                 <Flex alignItems={'center'} gap={3}>
                   <Icon as={FcLike} boxSize={'36px'} />
                   <Text mt={1} fontWeight={'500'} color={'content.primary'}>
                     {data.like} loved this
                   </Text>
                 </Flex>
-                <Link className={'link-read'} to={`/blog/${data.id}`}>
-                  Read Now {'>'}
-                </Link>
               </Flex>
+              <Link to={`/admin/blog/update/${data.id}`}>
+                <Button
+                  boxSize={'50px'}
+                  bgColor={'white'}
+                  _hover={{
+                    bgColor: 'white',
+                  }}
+                  _focus={{
+                    bgColor: 'white',
+                  }}
+                  alignSelf={'start'}
+                >
+                  <Icon
+                    as={FiEdit}
+                    boxSize={'24px'}
+                    color={'content.primary'}
+                  />
+                </Button>
+              </Link>
             </Flex>
           ))}
         </>
@@ -121,4 +157,4 @@ const EmptyBlog = ({ cta }) => {
   );
 };
 
-export default Blog;
+export default ListBlog;

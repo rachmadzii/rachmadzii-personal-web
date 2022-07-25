@@ -3,34 +3,33 @@ import {
   Flex,
   Text,
   IconButton,
-  Button,
   Stack,
   Collapse,
-  Link,
   useDisclosure,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { NavLink } from 'react-router-dom';
 
 const navItems = [
   {
     label: 'Home',
-    href: '/',
+    path: '/',
   },
   {
     label: 'About',
-    href: '/about',
+    path: '/about',
   },
   {
     label: 'Achievement',
-    href: '/achievement',
+    path: '/achievement',
   },
   {
     label: 'Experience',
-    href: '/experience',
+    path: '/experience',
   },
   {
     label: 'Blog',
-    href: '/blog',
+    path: '/blog',
   },
 ];
 
@@ -57,34 +56,12 @@ function NavigationBar() {
 
           <Flex
             w={'full'}
-            justifyContent={'center'}
+            justifyContent={'end'}
             display={{ base: 'none', md: 'flex' }}
           >
             <DesktopNav />
           </Flex>
         </Flex>
-
-        <Stack justify={'flex-end'} direction={'row'} spacing={'auto'}>
-          <Button
-            py={'5'}
-            px={'7'}
-            borderRadius={12}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'content.secondary'}
-            bgColor={'content.tertiary'}
-            _hover={{
-              bg: 'content.secondary',
-              color: 'white',
-            }}
-            _focus={{
-              bg: 'content.secondary',
-              color: 'white',
-            }}
-          >
-            Login
-          </Button>
-        </Stack>
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
@@ -96,20 +73,15 @@ function NavigationBar() {
 
 const DesktopNav = () => {
   return (
-    <Stack direction={'row'} spacing={6} alignItems={'center'}>
+    <Stack direction={'row'} spacing={7} alignItems={'center'}>
       {navItems.map((navItem) => (
         <Box key={navItem.label}>
-          <Link
-            href={navItem.href ?? '#'}
-            fontWeight={500}
-            color={'text.gray'}
-            _hover={{
-              textDecoration: 'none',
-              color: 'content.primary',
-            }}
+          <NavLink
+            to={navItem.path}
+            className={({ isActive }) => (isActive ? 'nav-active' : 'nav-link')}
           >
             {navItem.label}
-          </Link>
+          </NavLink>
         </Box>
       ))}
     </Stack>
@@ -126,20 +98,12 @@ const MobileNav = () => {
   );
 };
 
-const MobileNavItem = ({ label, children, href }) => {
+const MobileNavItem = ({ label, children, path }) => {
   const { onToggle } = useDisclosure();
 
   return (
     <Stack spacing={4} onClick={children && onToggle}>
-      <Flex
-        py={2}
-        as={Link}
-        href={href ?? '#'}
-        align={'center'}
-        _hover={{
-          textDecoration: 'none',
-        }}
-      >
+      <Flex py={2} as={NavLink} to={path} className={'nav-link'}>
         <Text fontWeight={500} color={'text.gray'}>
           {label}
         </Text>

@@ -1,65 +1,11 @@
-import {
-  Link,
-  Button,
-  Flex,
-  Heading,
-  Icon,
-  Image,
-  Text,
-} from '@chakra-ui/react';
+import { Link, Flex, Heading, Icon, Image, Text } from '@chakra-ui/react';
 import BaseLayout from 'components/layout/BaseLayout';
 import React from 'react';
-import image from 'assets/images/my_photo.png';
-import {
-  BsLinkedin,
-  BsInstagram,
-  BsGithub,
-  BsDribbble,
-  BsTwitter,
-  BsGlobe2,
-} from 'react-icons/bs';
+
+import DOMPurify from 'dompurify';
+import { data } from 'data';
 
 function About() {
-  const data = {
-    photo: image,
-    name: 'Rachma Adzima Maulida',
-    description:
-      'I am Rachma, an undergraduate at UPN Veteran Jakarta majoring in Informatics. Welcome to my space on the web; this space will be used to share projects I have made, my writings, and other things I want to share. <br /> Since getting to know technology, I have liked exploring all fields such as UI Design, Web Design, Mobile Development, Web Development, Flutter, and Quality Assurance. Besides, I will never stop learning to increase my knowledge. Sometimes the world goes so fast that I have to keep up!',
-    socialMedia: [
-      {
-        name: 'LinkedIn',
-        icon: BsLinkedin,
-        link: 'https://www.linkedin.com/in/rachma-adzima/',
-      },
-      {
-        name: 'Instagram',
-        icon: BsInstagram,
-        link: 'https://www.instagram.com/rachmadzii/',
-      },
-
-      {
-        name: 'Github',
-        icon: BsGithub,
-        link: 'https://github.com/rachmadzii',
-      },
-      {
-        name: 'Dribbble',
-        icon: BsDribbble,
-        link: 'https://dribbble.com/rachmadzii',
-      },
-      {
-        name: 'Twitter',
-        icon: BsTwitter,
-        link: 'https://twitter.com/rachmadzii',
-      },
-      {
-        name: 'Website',
-        icon: BsGlobe2,
-        link: 'https://rachmadzii.carrd.co/',
-      },
-    ],
-  };
-
   return (
     <BaseLayout>
       <Flex
@@ -100,7 +46,7 @@ function About() {
                 base: 'text.gray',
                 md: 'white',
               }}
-              borderRadius={'10px'}
+              borderRadius={'12px'}
             />
             <Text
               fontWeight={'semibold'}
@@ -132,7 +78,13 @@ function About() {
                 md: 'text.gray',
               }}
             >
-              {data.description}
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(data.about, {
+                    FORCE_BODY: true,
+                  }),
+                }}
+              />
             </Text>
             <Text
               mt={6}
@@ -143,25 +95,14 @@ function About() {
             >
               Find me on Social Media
             </Text>
-            <Flex gap={4} flexWrap={'wrap'}>
+            <Flex gap={6} flexWrap={'wrap'}>
               {data.socialMedia.map((data) => (
                 <Link key={data.name} target="_blank" href={data.link}>
-                  <Button
-                    p={0}
-                    bgColor={'transparent'}
-                    _hover={{
-                      bgColor: 'transparent',
-                    }}
-                    _focus={{
-                      bgColor: 'transparent',
-                    }}
-                  >
-                    <Icon
-                      as={data.icon}
-                      boxSize={'32px'}
-                      color={{ base: 'content.primary', md: 'white' }}
-                    />
-                  </Button>
+                  <Icon
+                    as={data.icon}
+                    boxSize={'32px'}
+                    color={{ base: 'content.primary', md: 'white' }}
+                  />
                 </Link>
               ))}
             </Flex>

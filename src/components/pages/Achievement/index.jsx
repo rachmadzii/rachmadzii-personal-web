@@ -1,5 +1,6 @@
 import { Box, Center, Flex, Grid, Heading, Icon, Text } from '@chakra-ui/react';
 import BaseLayout from 'components/layout/BaseLayout';
+import { data } from 'data';
 import React from 'react';
 import { BsAward, BsLaptop } from 'react-icons/bs';
 
@@ -35,35 +36,6 @@ function Achievement() {
 }
 
 const CardAchievement = () => {
-  const achievement = [
-    {
-      id: 1,
-      category: 'award',
-      title: '3rd Winner Competitive Programming',
-      subtitle: 'Slashcomp BEMF-IK UPN Veteran Jakarta on 2021.',
-    },
-    {
-      id: 2,
-      category: 'award',
-      title: 'Awarded as Best Mardhika Staff',
-      subtitle: 'BEM UPN Veteran Jakarta in July 2021.',
-    },
-    {
-      id: 3,
-      category: 'webinar',
-      title: 'Webinar Speaker at BISA AI Academy',
-      subtitle:
-        'Headed up two webinars on the topics of Creating ToDo App using PHP and MySQL, also Berkenalan Dengan Dart.',
-    },
-    {
-      id: 4,
-      category: 'webinar',
-      title: 'Webinar Speaker at BuildWith Angga',
-      subtitle:
-        'Headed up webinars on the topics of Implement UI Design into a Website with HTML and CSS Bootstrap 5.',
-    },
-  ];
-
   return (
     <Grid
       templateColumns={{
@@ -72,7 +44,7 @@ const CardAchievement = () => {
       }}
       gap={10}
     >
-      {achievement.map((data) => (
+      {data.achievement.map((data) => (
         <Box
           key={data.id}
           p={7}

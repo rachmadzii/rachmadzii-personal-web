@@ -3,7 +3,7 @@ import { Button } from '@chakra-ui/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function ButtonPrimary({ cta, align, route, withIcon }) {
+function ButtonNavigate({ cta, align, path, withIcon }) {
   const navigate = useNavigate();
 
   return (
@@ -28,12 +28,13 @@ function ButtonPrimary({ cta, align, route, withIcon }) {
         bg: 'content.tertiary',
         color: 'content.secondary',
       }}
+      gap={2}
       leftIcon={withIcon && <AddIcon />}
-      onClick={() => navigate(`${route}`)}
+      onClick={() => navigate(`${path}`)}
     >
       {cta}
     </Button>
   );
 }
 
-export default ButtonPrimary;
+export default ButtonNavigate;
