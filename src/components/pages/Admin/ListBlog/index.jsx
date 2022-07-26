@@ -103,7 +103,7 @@ const GetAllBlog = () => {
                 >
                   {data.title}
                 </Heading>
-                <Text color={'content.primary'}>
+                <Text noOfLines={2} color={'content.primary'}>
                   <span
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(data.content, {

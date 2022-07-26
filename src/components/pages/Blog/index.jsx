@@ -85,13 +85,15 @@ const ListBlog = () => {
                 >
                   {data.title}
                 </Heading>
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(data.content, {
-                      FORCE_BODY: true,
-                    }),
-                  }}
-                />
+                <Text noOfLines={2} color={'content.primary'}>
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(data.content, {
+                        FORCE_BODY: true,
+                      }),
+                    }}
+                  />
+                </Text>
                 <Flex alignItems={'center'} gap={3}>
                   <Icon as={FcLike} boxSize={'36px'} />
                   <Text mt={1} fontWeight={'500'} color={'content.primary'}>
