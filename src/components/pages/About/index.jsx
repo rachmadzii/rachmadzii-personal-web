@@ -17,11 +17,10 @@ function About() {
         <Flex
           bgColor={{
             base: 'white',
-            md: 'content.primary',
           }}
           rowGap={10}
           columnGap={16}
-          flexDirection={{ base: 'column', lg: 'row' }}
+          flexDirection={{ base: 'column', xl: 'row' }}
           p={{
             base: 4,
             md: 14,
@@ -43,8 +42,7 @@ function About() {
               p={1}
               border={'1px'}
               borderColor={{
-                base: 'text.gray',
-                md: 'white',
+                base: 'content.primary',
               }}
               borderRadius={'12px'}
             />
@@ -66,17 +64,14 @@ function About() {
             </Text>
             <Heading
               size={'xl'}
-              color={{ base: 'content.primary', md: 'white' }}
+              color={'content.primary'}
             >
               {data.name}
             </Heading>
             <Text
               lineHeight={'32px'}
               fontWeight={'500'}
-              color={{
-                base: 'content.primary',
-                md: 'text.gray',
-              }}
+              color={'content.primary'}
             >
               <span
                 dangerouslySetInnerHTML={{
@@ -101,7 +96,7 @@ function About() {
                   <Icon
                     as={data.icon}
                     boxSize={'32px'}
-                    color={{ base: 'content.primary', md: 'white' }}
+                    color={'content.primary'}
                   />
                 </Link>
               ))}

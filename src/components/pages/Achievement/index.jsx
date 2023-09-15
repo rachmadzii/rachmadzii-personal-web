@@ -58,6 +58,10 @@ const CardAchievement = () => {
             bgColor={'content.primary'}
             borderRadius={'12px'}
             boxSize={'56px'}
+            _hover={{
+              color: 'white',
+              bgColor: 'content.secondary',
+            }}
           >
             <Icon
               as={data.category === 'award' ? BsAward : BsLaptop}

@@ -57,10 +57,10 @@ const ListBlog = () => {
     <Flex flexDirection={'column'} gap={10} w={'100%'}>
       {articles ? (
         <>
-          {articles.length === 0 && (
+          {(articles.error || articles.length === 0) && (
             <EmptyBlog cta={'No articles are available yet'} />
           )}
-          {articles.map((data) => (
+          {articles.length > 0 && articles.map((data) => (
             <Flex
               key={data.id}
               p={{

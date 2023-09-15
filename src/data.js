@@ -114,5 +114,17 @@ export const data = {
       subtitle:
         'Participant of Generasi GIGIH 2.0 Independent Study. Motivated on the Frontend Engineer Track that learns React JS, TypeScript, GIT, and more.',
     },
+    {
+      id: '07',
+      title: 'HRIS Developer at Harian Kompas',
+      subtitle:
+        'I am responsible for developing Penilaian Kinerja Online and Karier Kompas websites using Laravel, Tailwind, and MySQL technologies.',
+    },
+    {
+      id: '08',
+      title: 'Frontend Developer at Qollega',
+      subtitle:
+        'I am responsible for developing Qollega POS and Backoffice websites using Vue.js, Bootstrap, PrimeVue, and several libraries.',
+    },
   ],
 };
